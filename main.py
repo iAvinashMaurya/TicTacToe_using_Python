@@ -1,32 +1,33 @@
-# --------- Global Variables -----------
+#TIC TAC TOE
+#------------GLOBAL VARIABLES----------------
 
-# Will hold our game board data
+# GAME BOARD
 board = ["-", "-", "-",
          "-", "-", "-",
          "-", "-", "-"]
 
-# Lets us know if the game is over yet
-game_still_going = True
+# Status of game
+in_game = True
 
-# Tells us who the winner is
+# Status of winner
 winner = None
 
-# Tells us who the current player is (X goes first)
+# Current Player (X plays first)
 current_player = "X"
 
 
-# ------------- Functions ---------------
+# ------------- FUNCTIONS ---------------
 
-# Play a game of tic tac toe
+# Function for gameplay
 def play_game():
 
-  # Show the initial game board
+  # Display of initial game board
   display_board()
 
   # Loop until the game stops (winner or tie)
-  while game_still_going:
+  while in_game:
 
-    # Handle a turn
+    # Handle turns
     handle_turn(current_player)
 
     # Check if the game is over
@@ -35,7 +36,7 @@ def play_game():
     # Flip to the other player
     flip_player()
   
-  # Since the game is over, print the winner or tie
+  # Print the winner or tie
   if winner == "X" or winner == "O":
     print(winner + " won.")
   elif winner == None:
@@ -110,14 +111,14 @@ def check_for_winner():
 # Check the rows for a win
 def check_rows():
   # Set global variables
-  global game_still_going
+  global in_game
   # Check if any of the rows have all the same value (and is not empty)
   row_1 = board[0] == board[1] == board[2] != "-"
   row_2 = board[3] == board[4] == board[5] != "-"
   row_3 = board[6] == board[7] == board[8] != "-"
   # If any row does have a match, flag that there is a win
   if row_1 or row_2 or row_3:
-    game_still_going = False
+    in_game = False
   # Return the winner
   if row_1:
     return board[0] 
@@ -133,14 +134,14 @@ def check_rows():
 # Check the columns for a win
 def check_columns():
   # Set global variables
-  global game_still_going
+  global in_game
   # Check if any of the columns have all the same value (and is not empty)
   column_1 = board[0] == board[3] == board[6] != "-"
   column_2 = board[1] == board[4] == board[7] != "-"
   column_3 = board[2] == board[5] == board[8] != "-"
   # If any row does have a match, flag that there is a win
   if column_1 or column_2 or column_3:
-    game_still_going = False
+    in_game = False
   # Return the winner
   if column_1:
     return board[0] 
@@ -156,13 +157,13 @@ def check_columns():
 # Check the diagonals for a win
 def check_diagonals():
   # Set global variables
-  global game_still_going
+  global in_game
   # Check if any of the columns have all the same value (and is not empty)
   diagonal_1 = board[0] == board[4] == board[8] != "-"
   diagonal_2 = board[2] == board[4] == board[6] != "-"
   # If any row does have a match, flag that there is a win
   if diagonal_1 or diagonal_2:
-    game_still_going = False
+    in_game = False
   # Return the winner
   if diagonal_1:
     return board[0] 
@@ -176,10 +177,10 @@ def check_diagonals():
 # Check if there is a tie
 def check_for_tie():
   # Set global variables
-  global game_still_going
+  global in_game
   # If board is full
   if "-" not in board:
-    game_still_going = False
+    in_game = False
     return True
   # Else there is no tie
   else:
@@ -198,6 +199,5 @@ def flip_player():
     current_player = "X"
 
 
-# ------------ Start Execution -------------
-# Play a game of tic tac toe
+# ------------ Start Game -------------
 play_game()
